@@ -1,0 +1,55 @@
+{
+    "budget": 300.0,
+    "current_usage": 262.84090339378196,
+    "predicted_usage": 302.2670389028492,
+    "stage": "Smart Optimization",
+    "appliances": [
+        {
+            "name": "Air Conditioner",
+            "power_w": 1000,
+            "status": "ON",
+            "priority": "Important",
+            "co2e_contrib": 45.0
+        },
+        {
+            "name": "Refrigerator",
+            "power_w": 400,
+            "status": "ON",
+            "priority": "Essential",
+            "co2e_contrib": 30.0
+        },
+        {
+            "name": "Water Heater",
+            "power_w": 2000,
+            "status": "OFF",
+            "priority": "Important",
+            "co2e_contrib": 20.0
+        },
+        {
+            "name": "Gaming PC",
+            "power_w": 0,
+            "status": "ON",
+            "priority": "Non-Essential",
+            "co2e_contrib": 25.0
+        },
+        {
+            "name": "Washing Machine",
+            "power_w": 1000,
+            "status": "OFF",
+            "priority": "Important",
+            "co2e_contrib": 15.0
+        },
+        {
+            "name": "Decorative Lights",
+            "power_w": 0,
+            "status": "ON",
+            "priority": "Non-Essential",
+            "co2e_contrib": 15.0
+        }
+    ],
+    "ai_insight": "Smart Optimization active. I have adjusted your high-drain appliances to prevent a budget breach.",
+    "agent_actions": [
+        "[ACTION] Adjusted Air Conditioner temp by +1\u00b0C (Eco-Mode).",
+        "[WARNING] Sent push notification to user regarding increased consumption."
+    ]
+}
