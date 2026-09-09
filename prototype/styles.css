@@ -1,0 +1,192 @@
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    /* Stage Colors */
+    --color-normal: #10b981; /* Green */
+    --color-warning: #f59e0b; /* Yellow */
+    --color-optimization: #f97316; /* Orange */
+    --color-critical: #ef4444; /* Red */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.08), transparent 25%);
+}
+
+/* Typography */
+h2, h3 { font-weight: 600; margin-bottom: 1rem; }
+.huge-text { font-size: 4rem; font-weight: 800; letter-spacing: -1px; }
+.sub-text { font-size: 1.5rem; color: var(--text-muted); }
+.stat-label { font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.stat-value { font-size: 1.25rem; font-weight: 600; }
+
+/* Layout */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+@media(max-width: 768px) {
+    .grid-container { grid-template-columns: 1fr; }
+}
+
+.col-left, .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Glassmorphism Cards */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Status Indicator */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+}
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-normal);
+    box-shadow: 0 0 10px var(--color-normal);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--color-normal);
+    border-radius: 10px;
+    transition: width 1s ease-in-out, background-color 1s ease;
+}
+
+.budget-stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Insight Card */
+.insight-card {
+    background: linear-gradient(135deg, rgba(30,41,59,0.9), rgba(15,23,42,0.9));
+    border-left: 4px solid #38bdf8;
+}
+.insight-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #e2e8f0;
+}
+.action-btn {
+    background: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s, transform 0.1s;
+}
+.action-btn:hover { background: #0ea5e9; transform: translateY(-2px); }
+.action-btn:active { transform: translateY(0); }
+
+/* Appliance List */
+.appliance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+.appliance-item:hover { border-color: rgba(255,255,255,0.1); }
+.appliance-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+.priority-badge {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.1);
+}
+.app-status { font-weight: 600; }
+.status-on { color: var(--color-normal); }
+.status-off { color: var(--text-muted); }
+
+/* Log List */
+.log-list { list-style: none; }
+.log-list li {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-muted);
+}
+.log-list li:first-child { color: var(--text-main); font-weight: 600; }
