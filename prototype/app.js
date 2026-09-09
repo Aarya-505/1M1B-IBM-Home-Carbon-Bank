@@ -25,6 +25,7 @@ async function fetchState() {
         updateDashboard(state);
     } catch (error) {
         console.error("Waiting for state.json from Python simulator...", error);
+        // If it fails, the python script isn't running
     }
 }
 
@@ -82,7 +83,38 @@ function updateDashboard(state) {
 setInterval(fetchState, 1500);
 fetchState(); // Initial call
 
-// Action Button Demo
-document.querySelector('.action-btn').addEventListener('click', () => {
-    alert("IBM BOB: Analyzing your current metrics... generating custom optimization schedules. (This is a prototype button feature!)");
+// Action Button Demo (More Interactive)
+document.querySelector('.action-btn').addEventListener('click', (e) => {
+    const btn = e.target;
+    
+    // Check if we already have results showing
+    if(document.querySelector('.action-results')) {
+        document.querySelector('.action-results').remove();
+    }
+
+    // Button animation
+    btn.innerText = "IBM BOB is analyzing...";
+    btn.style.backgroundColor = "#f59e0b"; // warning color while thinking
+    btn.disabled = true;
+    
+    // Simulate API delay for AI generation
+    setTimeout(() => {
+        btn.innerText = "Take Carbon Action";
+        btn.style.backgroundColor = "#38bdf8"; // back to normal
+        btn.disabled = false;
+
+        const results = document.createElement('div');
+        results.className = 'action-results';
+        results.innerHTML = `
+            <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">💡 Generated Actions</h4>
+            <ul style="list-style: none; padding-left: 0; font-size: 0.95rem; color: #e2e8f0; line-height: 1.5;">
+                <li style="margin-bottom: 0.5rem;">🟢 <strong>Air Conditioner:</strong> Switch to Eco-Mode (Saves ~12 kg CO₂e)</li>
+                <li style="margin-bottom: 0.5rem;">🟢 <strong>Water Heater:</strong> Delay usage until off-peak hours (Saves ~5 kg CO₂e)</li>
+                <li>🟢 <strong>Decorative Lights:</strong> Turn off immediately (Saves ~2 kg CO₂e)</li>
+            </ul>
+        `;
+        
+        // Append below the button
+        btn.parentNode.appendChild(results);
+    }, 2000); // 2 second delay
 });
