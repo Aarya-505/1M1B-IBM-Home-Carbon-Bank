@@ -51,10 +51,10 @@ function updateDashboard(state) {
     UI.insightText.innerText = state.ai_insight;
 
     // Appliances
-    UI.applianceList.innerHTML = '';
+    let newApplianceHTML = '';
     state.appliances.forEach(app => {
         const statusClass = app.status === 'ON' ? 'status-on' : 'status-off';
-        UI.applianceList.innerHTML += `
+        newApplianceHTML += `
             <div class="appliance-item" style="border-left: 3px solid ${app.status === 'ON' ? stageColor : '#333'}">
                 <div class="appliance-info">
                     <h4>${app.name}</h4>
@@ -67,15 +67,21 @@ function updateDashboard(state) {
             </div>
         `;
     });
+    if (UI.applianceList.innerHTML.trim() !== newApplianceHTML.trim()) {
+        UI.applianceList.innerHTML = newApplianceHTML;
+    }
 
     // Agent Log
-    UI.agentLog.innerHTML = '';
+    let newLogHTML = '';
     if(state.agent_actions.length === 0) {
-        UI.agentLog.innerHTML = '<li>System monitoring active. No actions taken yet.</li>';
+        newLogHTML = '<li>System monitoring active. No actions taken yet.</li>';
     } else {
         state.agent_actions.forEach(action => {
-            UI.agentLog.innerHTML += `<li>${action}</li>`;
+            newLogHTML += `<li>${action}</li>`;
         });
+    }
+    if (UI.agentLog.innerHTML.trim() !== newLogHTML.trim()) {
+        UI.agentLog.innerHTML = newLogHTML;
     }
 }
 
